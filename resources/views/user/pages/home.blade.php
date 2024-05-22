@@ -479,22 +479,23 @@
     <section class="my-5">
         <h2 class="text-[25px] sm:text-[34px] text-center mb-5 font-bold px-1">What do our participants say</h2>
         <div class="w-[80%] mx-auto flex flex-col lg:flex-row gap-5">
-            <div class="w-full lg:w-[45%] bg-[#e7e6e6] h-[300px] rounded-3xl relative">
-                <i class="fa-solid fa-circle-play absolute top-[43%] left-[43%] text-[50px] cursor-pointer"
-                    onclick="playVideo(1)"></i>
-                <video id="video1" class="w-[100%] h-[300px] rounded-3xl" controls>
-                    <source src="./src/img/3327752-hd_1920_1080_24fps.mp4">
-                </video>
-            </div>
-            <div class="w-full lg:w-[45%] bg-[#e7e6e6] h-[300px] rounded-3xl relative">
-                <i class="fa-solid fa-circle-play absolute top-[43%] left-[43%] text-[50px] cursor-pointer"
-                    onclick="playVideo(2)"></i>
-                <video id="video2" class="w-[100%] h-[300px] rounded-3xl" controls>
-                    <source src="./src/img/3327752-hd_1920_1080_24fps.mp4">
-                </video>
-            </div>
+            @php
+                $videoItems = App\Models\Testimonial::whereNotNull('video_link')->get();
+            @endphp
+
+            @foreach ($videoItems as $index => $videoItem)
+                <div class="w-full lg:w-[45%] bg-[#e7e6e6] h-[300px] rounded-3xl relative">
+                    <div class="rounded-3xl overflow-hidden w-full h-full">
+                        <iframe id="video{{ $index + 1 }}" class="w-full h-full rounded-3xl"
+                                src="{{ str_replace('watch?v=', 'embed/', $videoItem->video_link) }}"
+                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </section>
+
 
     <!-- participants section end -->
 
@@ -524,61 +525,33 @@
 
             <div class="-mx-6 mt-8 lg:col-span-2 lg:mx-0">
                 <div id="keen-slider" class="keen-slider">
+                    @php
+                      $testimonialItems = App\Models\Testimonial::whereNull('video_link')->get();
+                @endphp
+
+                @foreach ($testimonialItems as $item)
                     <div class="keen-slider__slide rounded-md">
                         <div class="flex justify-center items-center flex-col">
                             <img class="inline-block flex-shrink-0 size-[62px] rounded-full"
-                                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                                src="{{ asset($item->photo) }}"
                                 alt="Image Description">
                             <div class="ms-3">
-                                <h3 class="font-semibold text-gray-800 dark:text-white">Mark Wanner</h3>
-                                <p class="text-sm font-medium text-gray-400 dark:text-neutral-500">mark@gmail.com</p>
+                                <h3 class="font-semibold text-gray-800 dark:text-white">{{ $item->name }}</h3>
+                                @if ($item->designation)
+                                <p class="text-sm font-medium text-gray-400 dark:text-neutral-500">{{ $item->designation }}</p>
+                                @endif
+
                             </div>
-                            <div class="w-[400px] h-[250px] bg-[#e7e6e6] rounded-2xl mt-3"></div>
+                            <div class="w-[400px] h-[250px] bg-[#e7e6e6] rounded-2xl mt-3 p-2">
+                                {{ $item->feedback }}
+                            </div>
 
                         </div>
                     </div>
+                    @endforeach
 
-                    <div class="keen-slider__slide rounded-md">
-                        <div class="flex justify-center items-center flex-col">
-                            <img class="inline-block flex-shrink-0 size-[62px] rounded-full"
-                                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                                alt="Image Description">
-                            <div class="ms-3">
-                                <h3 class="font-semibold text-gray-800 dark:text-white">Mark Wanner</h3>
-                                <p class="text-sm font-medium text-gray-400 dark:text-neutral-500">mark@gmail.com</p>
-                            </div>
-                            <div class="w-[400px] h-[250px] bg-[#e7e6e6] rounded-2xl mt-3"></div>
 
-                        </div>
-                    </div>
 
-                    <div class="keen-slider__slide rounded-md">
-                        <div class="flex justify-center items-center flex-col">
-                            <img class="inline-block flex-shrink-0 size-[62px] rounded-full"
-                                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                                alt="Image Description">
-                            <div class="ms-3">
-                                <h3 class="font-semibold text-gray-800 dark:text-white">Mark Wanner</h3>
-                                <p class="text-sm font-medium text-gray-400 dark:text-neutral-500">mark@gmail.com</p>
-                            </div>
-                            <div class="w-[400px] h-[250px] bg-[#e7e6e6] rounded-2xl mt-3"></div>
-
-                        </div>
-                    </div>
-
-                    <div class="keen-slider__slide rounded-md">
-                        <div class="flex justify-center items-center flex-col">
-                            <img class="inline-block flex-shrink-0 size-[62px] rounded-full"
-                                src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-                                alt="Image Description">
-                            <div class="ms-3">
-                                <h3 class="font-semibold text-gray-800 dark:text-white">Mark Wanner</h3>
-                                <p class="text-sm font-medium text-gray-400 dark:text-neutral-500">mark@gmail.com</p>
-                            </div>
-                            <div class="w-[400px] h-[250px] bg-[#e7e6e6] rounded-2xl mt-3"></div>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -590,21 +563,29 @@
     <!-- mentor box start -->
 
     <section class="bg-[#0097B2] py-16 text-white">
-
-        <div class="flex gap-5 w-[80%] mx-auto flex-col md:flex-row">
-            <div class=" w-[100%] md:w-[35%] h-[300px] bg-[#e7e6e6] rounded-3xl"></div>
-            <div class=" w-[100%] md:w-[60%] xl:w-[45%]">
-                <h2 class=" font-semibold text-[26px] mb-2">Meet our mentor</h2>
-                <p>Mr. RAGHUNATH THORAT </br> I am the founder of 'THE MAGIC OF MEDITATION' I am on a mission to help 10
-                    Lakh people to make a difference in their Health, Relationship, Career, Money. with the help of
-                    </br>SUPER MAGICAL HAPPY MORNING COURSE</p>
-                <p class="mt-4">आपले विचारच आपली अंतिम स्थिती घडवत असतात.सुपर मॅजिकल हॅप्पी मॉर्निंग प्रॅक्टिसेसच्या
-                    सहाय्याने पद्धतशीरपणे आरोग्य,नातेसंबंध,करिअर आणि पैसा यामध्ये आमूलाग्र बदल मी स्वतः अनुभवलेला आहे
-                    आणि इतरांना सुद्धा त्यामध्ये मदत केलेली आहे.सखोल माहिती साठी आत्ताच रजिस्टर करा.</p>
+        @php
+            $mentor = App\Models\Mentor::firstOrFail();
+        @endphp
+        @if ($mentor)
+            <div class="flex gap-5 w-[80%] mx-auto flex-col md:flex-row">
+                <div class="w-[100%] md:w-[35%] h-[300px] bg-[#e7e6e6] rounded-3xl overflow-hidden">
+                    @if($mentor->mentor_img)
+                        <img src="{{ asset( $mentor->mentor_img) }}" alt="Mentor Image" class="object-cover h-full w-full">
+                    @else
+                        <div class="h-full w-full flex items-center justify-center">
+                            <span class="text-gray-500">No Image Available</span>
+                        </div>
+                    @endif
+                </div>
+                <div class="w-[100%] md:w-[60%] xl:w-[45%]">
+                    <h2 class="font-semibold text-[26px] mb-2">{{ $mentor->main_heading }}</h2>
+                    <p>{{ $mentor->mentor_name }}</p>
+                    <div>{!! $mentor->description !!}</div>
+                </div>
             </div>
-        </div>
-
+        @endif
     </section>
+
     <!-- mentor box start -->
 
 

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Backend\BackendController;
+use App\Http\Controllers\Backend\MentorController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
@@ -27,6 +29,25 @@ Route::middleware('auth')->group(function () {
         Route::get('/bonuses/{bonus}/edit', [BackendController::class, 'editBonus'])->name('bonuses.edit');
         Route::put('/update/bonuses/{bonus}', [BackendController::class, 'updateBonus'])->name('bonuses.update');
         Route::delete('/delete/bonuses/{bonus}', [BackendController::class, 'deleteBonus'])->name('bonuses.destroy');
+
+
+        // TESTIMONIALS
+        Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+        Route::get('/testimonials/create', [TestimonialController::class, 'create'])->name('testimonials.create');
+        Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
+        Route::get('/testimonials/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('testimonials.edit');
+        Route::put('/testimonials/{testimonial}', [TestimonialController::class, 'update'])->name('testimonials.update');
+        Route::delete('/testimonials/{testimonial}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy');
+
+
+        // MENTOR
+        Route::get('/admin/mentor/edit', [MentorController::class, 'editMentor'])->name('admin.edit.mentor');
+        Route::post('/admin/mentor/update', [MentorController::class, 'updateMentor'])->name('admin.mentor.update');
+
+        //Payment
+        Route::get('/customer/payment/list', [BackendController::class, 'customerPayment'])->name('payment.list');
+        Route::delete('/admin/payments/{payment}', [BackendController::class, 'destroyPayment'])->name('payments.destroy');
+
     });
 });
 

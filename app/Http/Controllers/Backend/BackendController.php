@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Banner1;
 use App\Models\Bonus;
 use App\Models\Header;
+use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BackendController extends Controller
 {
@@ -210,4 +212,22 @@ class BackendController extends Controller
         $bonus->delete();
         return redirect()->route('bonuses.all')->with('success', 'Bonus deleted successfully!');
     }
+
+
+    public function customerPayment(){
+        $payments = Payment::where('status', 1)->paginate(10);
+        return view('admin.pages.payment_list', compact('payments'));
+   }
+
+   public function getPrice()
+{
+   return DB::table('settings')->select('price')->first();
+}
+
+   public function destroyPayment(Payment $payment)
+   {
+       $payment->delete();
+
+       return redirect()->back()->with('message', 'Payment Record deleted successfully.');
+   }
 }

@@ -11,14 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('testimonials', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('designation');
-            $table->text('feedback');
-            $table->string('photo')->nullable();
-            $table->longText('video_link')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone');
+            $table->string('city')->nullable();
+            $table->integer('price');
+            $table->string('r_payment_id');
+            $table->string('r_order_id');
+            $table->boolean('status')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -27,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('testimonials');
+        Schema::dropIfExists('payments');
     }
 };

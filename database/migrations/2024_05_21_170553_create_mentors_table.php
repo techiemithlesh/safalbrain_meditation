@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('testimonials', function (Blueprint $table) {
+        Schema::create('mentors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('designation');
-            $table->text('feedback');
-            $table->string('photo')->nullable();
-            $table->longText('video_link')->nullable();
+            $table->string('bg_color')->default('#0097B2');
+            $table->longText('mentor_img')->nullable();
+            $table->text('main_heading')->default('Meet our mentor');
+            $table->string('mentor_name')->default('Devratha Maithy');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('testimonials');
+        Schema::dropIfExists('mentors');
     }
 };

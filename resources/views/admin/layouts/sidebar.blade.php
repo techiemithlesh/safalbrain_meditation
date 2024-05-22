@@ -35,36 +35,30 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.header.edit') }}">Update Header</a>
+            </div>
+        </div>
+    </li>
+
+    <hr class="sidebar-divider">
+     <!-- Heading -->
+     <div class="sidebar-heading">
+        Banner Section
+    </div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-blog"></i>
+            <span>Banner</span>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('admin.edit_banner1') }}">Update Banner 1</a>
+                <a class="collapse-item" href="{{ route('admin.edit.mentor') }}">Update Mentor</a>
             </div>
         </div>
     </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Articles
-    </div>
-
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseImg"
-            aria-expanded="true" aria-controls="collapseImg">
-            <i class="fas fa-fw fa-calendar"></i>
-            <span>Webinar</span>
-        </a>
-        <div id="collapseImg" class="collapse" aria-labelledby="collapseImg" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">Update You Get Image</a>
-                <a class="collapse-item" href="">Update Description</a>
-
-
-            </div>
-        </div>
-    </li>
-
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
@@ -74,24 +68,12 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('bonuses.all') }}">All Bonus</a>
-                <a class="collapse-item" href="">Create Bonus</a>
+                <a class="collapse-item" href="{{ route('bonuses.create') }}">Create Bonus</a>
             </div>
         </div>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-            aria-expanded="true" aria-controls="collapseThree">
-            <i class="fas fa-fw fa-pencil-alt"></i>
-            <span>FAQS</span>
-        </a>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">All Faq's</a>
-                <a class="collapse-item" href="">Create Faq's</a>
-            </div>
-        </div>
-    </li>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -109,8 +91,8 @@
         </a>
         <div id="collapseFour" class="collapse" aria-labelledby="collapseFour" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">All Testimonials</a>
-                <a class="collapse-item" href="">Create Testimonial</a>
+                <a class="collapse-item" href="{{ route('testimonials.index') }}">All Testimonials</a>
+                <a class="collapse-item" href="{{ route('testimonials.create') }}">Create Testimonial</a>
             </div>
         </div>
     </li>
@@ -133,7 +115,7 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">Payment List</a>
+                <a class="collapse-item" href="{{ route('payment.list') }}">Payment List</a>
                 <a class="collapse-item" href="">Enquiry List</a>
                 <a class="collapse-item" href="#">Send Reminder</a>
             </div>
